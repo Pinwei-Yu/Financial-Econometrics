@@ -1,0 +1,13 @@
+install.packages("rvest")
+install.packages("magrittr")
+install.packages("stringr")
+install.packages("xml2")
+library(rvest)
+library(magrittr)
+library(stringr)
+library(xml2)
+link <-"https://udn.com/news/story/7314/4069865"
+news <- read_html("https://udn.com/news/story/7314/4069865")
+News_Title <- news%>%html_nodes(".story_art_title")%>%html_text()
+article <- news %>% html_nodes("#story_body_content") %>% html_nodes("p") %>%html_text() %>%str_c(collapse = "")
+write.csv(article,News_Title)
